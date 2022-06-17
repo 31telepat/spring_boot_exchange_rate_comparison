@@ -43,10 +43,10 @@ public class ExchangeRateService {
     }
 
     public int getCompareRates(String charCode) {
-        Double prevCoefficient = getCurrency(lastRate, charCode);
-        Double currentCoefficient = getCurrency(currentRate, charCode);
+        Double lastCurrency = getCurrency(lastRate, charCode);
+        Double currentCurrency = getCurrency(currentRate, charCode);
 
-        return Double.compare(currentCoefficient, prevCoefficient);
+        return Double.compare(currentCurrency, lastCurrency);
     }
 
     public void getCurrentRates() {

@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.tsemenouski.spring_boot_exchange_rate_comparison.Exchang
+ eRateComparisonApplication
+
