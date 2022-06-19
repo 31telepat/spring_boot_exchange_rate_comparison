@@ -26,7 +26,7 @@ The configuration file is here:
 
 
 
-# Directions for starting:
+#Directions for starting:
  
  - use the .jar: 
 java -jar build\libs\spring_boot_exchange_rate_comparison-0.0.1-SNAPSHOT.jar
