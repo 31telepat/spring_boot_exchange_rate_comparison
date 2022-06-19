@@ -1,4 +1,4 @@
-#Description:
+# Description:
 
 This service is intended for the display of certain gifs depending on the exchange rate compared with the previous day value.
 The exchange rate it takes here: https://docs.openexchangerates.org/
@@ -16,7 +16,7 @@ For interaction with external services, Feign is used.
 
 The service is built with Gradle.
 
-#Settings:
+# Settings:
 The server port and the currency code to which exchange rate is compared, addresses, and keys of external services are in the configuration file. 
 You can change the keyword for searching the relevant gif. 
 
@@ -24,9 +24,7 @@ The configuration file is here:
 /src/main/resourses/application.properties
 
 
-
-
-#Directions for starting:
+# Directions for starting:
  
  - use the .jar: 
 java -jar build\libs\spring_boot_exchange_rate_comparison-0.0.1-SNAPSHOT.jar
