@@ -43,8 +43,8 @@ public class ExchangeRateService {
     }
 
     public int getCompareRates(String charCode) {
-        getCurrentRates();
         getLastRates();
+        getCurrentRates();
         Double lastCurrency = getCurrency(lastRate, charCode);
         Double currentCurrency = getCurrency(currentRate, charCode);
         if (lastCurrency == null || currentCurrency == null){

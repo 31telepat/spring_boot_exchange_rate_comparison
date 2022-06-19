@@ -11,5 +11,4 @@ public class ExchangeRateComparisonApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ExchangeRateComparisonApplication.class, args);
 	}
-
 }

@@ -34,42 +34,42 @@ public class RateServiceTest {
     @MockBean
     private ExchangeRateClient exchangeRateClient;
 
-    private ExchangeRate currentRates;
-    private ExchangeRate lastRates;
+    private ExchangeRate currentRate;
+    private ExchangeRate lastRate;
 
     @BeforeEach
     public void init() {
         int time = 1341936000;
-        this.currentRates = new ExchangeRate();
-        this.currentRates.setTimestamp(time);
-        this.currentRates.setBase("TEST_BASE");
+        this.currentRate = new ExchangeRate();
+        this.currentRate.setTimestamp(time);
+        this.currentRate.setBase("TEST_BASE");
         Map<String, Double> currentRatesMap = new HashMap<>();
         currentRatesMap.put("EQUAL", 1.0);
         currentRatesMap.put("DOWN", 1.0);
         currentRatesMap.put("UP", 2.0);
         currentRatesMap.put(base, 99.999999);
         currentRatesMap.put("TEST_BASE", 1.0);
-        currentRates.setRates(currentRatesMap);
+        currentRate.setRates(currentRatesMap);
 
         time = 1741936000;
-        lastRates = new ExchangeRate();
-        lastRates.setTimestamp(time);
-        lastRates.setBase("TEST_BASE");
+        lastRate = new ExchangeRate();
+        lastRate.setTimestamp(time);
+        lastRate.setBase("TEST_BASE");
         Map<String, Double> lastRatesMap = new HashMap<>();
         lastRatesMap.put("EQUAL", 1.0);
         lastRatesMap.put("DOWN", 2.0);
         lastRatesMap.put("UP", 1.0);
         lastRatesMap.put(base, 99.999999);
         lastRatesMap.put("TEST_BASE", 1.0);
-        lastRates.setRates(lastRatesMap);
+        lastRate.setRates(lastRatesMap);
     }
 
     @Test
     public void whenUpChanges() {
         Mockito.when(exchangeRateClient.getLatestRates(anyString()))
-                .thenReturn(currentRates);
+                .thenReturn(currentRate);
         Mockito.when(exchangeRateClient.getHistoricalRates(anyString(), anyString()))
-                .thenReturn(lastRates);
+                .thenReturn(lastRate);
         int result = exchangeRateService.getCompareRates("UP");
         assertEquals(1, result);
     }
@@ -77,9 +77,9 @@ public class RateServiceTest {
     @Test
     public void whenDownChanges() {
         Mockito.when(exchangeRateClient.getLatestRates(anyString()))
-                .thenReturn(currentRates);
+                .thenReturn(currentRate);
         Mockito.when(exchangeRateClient.getHistoricalRates(anyString(), anyString()))
-                .thenReturn(lastRates);
+                .thenReturn(lastRate);
         int result = exchangeRateService.getCompareRates("DOWN");
         assertEquals(-1, result);
     }
@@ -87,9 +87,9 @@ public class RateServiceTest {
     @Test
     public void whenNoChanges() {
         Mockito.when(exchangeRateClient.getLatestRates(anyString()))
-                .thenReturn(currentRates);
+                .thenReturn(currentRate);
         Mockito.when(exchangeRateClient.getHistoricalRates(anyString(), anyString()))
-                .thenReturn(lastRates);
+                .thenReturn(lastRate);
         int result = exchangeRateService.getCompareRates("EQUAL");
         assertEquals(0, result);
     }
@@ -97,9 +97,9 @@ public class RateServiceTest {
     @Test
     public void whenGotNull() {
         Mockito.when(exchangeRateClient.getLatestRates(anyString()))
-                .thenReturn(currentRates);
+                .thenReturn(currentRate);
         Mockito.when(exchangeRateClient.getHistoricalRates(anyString(), anyString()))
-                .thenReturn(lastRates);
+                .thenReturn(lastRate);
         int result = exchangeRateService.getCompareRates(null);
         assertEquals(2, result);
     }
@@ -107,53 +107,53 @@ public class RateServiceTest {
     @Test
     public void whenGotOtherCharCode() {
         Mockito.when(exchangeRateClient.getLatestRates(anyString()))
-                .thenReturn(currentRates);
+                .thenReturn(currentRate);
         Mockito.when(exchangeRateClient.getHistoricalRates(anyString(), anyString()))
-                .thenReturn(lastRates);
+                .thenReturn(lastRate);
         int result = exchangeRateService.getCompareRates("OTHER");
         assertEquals(2, result);
     }
 
     @Test
     public void whenCurrentIsNull() {
-        currentRates = null;
+        currentRate = null;
         Mockito.when(exchangeRateClient.getLatestRates(anyString()))
-                .thenReturn(currentRates);
+                .thenReturn(currentRate);
         Mockito.when(exchangeRateClient.getHistoricalRates(anyString(), anyString()))
-                .thenReturn(lastRates);
+                .thenReturn(lastRate);
         int result = exchangeRateService.getCompareRates("EQUAL");
         assertEquals(2, result);
     }
 
     @Test
     public void whenLastIsNull() {
-        lastRates = null;
+        lastRate = null;
         Mockito.when(exchangeRateClient.getLatestRates(anyString()))
-                .thenReturn(currentRates);
+                .thenReturn(currentRate);
         Mockito.when(exchangeRateClient.getHistoricalRates(anyString(), anyString()))
-                .thenReturn(lastRates);
+                .thenReturn(lastRate);
         int result = exchangeRateService.getCompareRates("EQUAL");
         assertEquals(2, result);
     }
 
     @Test
     public void whenCurrentAndLastIsNull() {
-        currentRates = null;
+        currentRate = null;
         Mockito.when(exchangeRateClient.getLatestRates(anyString()))
-                .thenReturn(currentRates);
+                .thenReturn(currentRate);
         Mockito.when(exchangeRateClient.getHistoricalRates(anyString(), anyString()))
-                .thenReturn(lastRates);
+                .thenReturn(lastRate);
         int result = exchangeRateService.getCompareRates("EQUAL");
         assertEquals(2, result);
     }
 
     @Test
     public void whenAppBaseIsChanged() {
-        this.currentRates.getRates().put(base, 99.999999);
+        this.currentRate.getRates().put(base, 99.999999);
         Mockito.when(exchangeRateClient.getLatestRates(anyString()))
-                .thenReturn(currentRates);
+                .thenReturn(currentRate);
         Mockito.when(exchangeRateClient.getHistoricalRates(anyString(), anyString()))
-                .thenReturn(lastRates);
+                .thenReturn(lastRate);
         int result = exchangeRateService.getCompareRates(base);
         assertEquals(0, result);
     }
